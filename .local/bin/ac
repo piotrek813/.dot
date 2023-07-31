@@ -1,0 +1,19 @@
+#!/usr/bin/bash
+
+session="aac"
+path="$HOME/data/code/aac"
+emulator_window="emulator"
+main_window="nvim"
+emulator_name="Pixel_3a_API_33_x86_64"
+
+tmux new-session -d -s "$session" -n "$main_window" -c "$path"
+tmux send-keys -t "$session":"$main_window" "nvim ." ENTER
+
+tmux new-window -d -n "$emulator_window" -t "$session"
+
+tmux send-keys -t "$session":"$emulator_window" 
+tmux send-keys -t "$session":"$emulator_window" "emulator -avd $emulator_name" Enter
+tmux attach -t "$session"
+
+wmctrl -r Emulator -t 2
+wmctrl -r "Android Emulator - Pixel_3a_API_33_x86_64:5554" -t 2

@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+emulator -list-avds | fzf | xargs | xargs emulator -avd
